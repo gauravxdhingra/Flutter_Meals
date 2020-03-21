@@ -108,8 +108,9 @@ class MealDetailScreen extends StatelessWidget {
                 )
               : Icon(
                   Icons.favorite,
-                  color: Colors.grey,
+                  color: Colors.white,
                 ),
+          backgroundColor: Colors.redAccent,
         ),
       ),
     );

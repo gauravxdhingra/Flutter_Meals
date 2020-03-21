@@ -16,7 +16,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  
   Map<String, bool> _filters = {
     'gluten': false,
     'lactose': false,
@@ -54,62 +53,64 @@ class _MyAppState extends State<MyApp> {
     if (existingIndex >= 0) {
       setState(() {
         favouriteMeals.removeAt(existingIndex);
+       
       });
     } else {
       setState(() {
         favouriteMeals.add(DUMMY_MEALS.firstWhere((meal) => meal.id == mealId));
+        
       });
     }
+  }
 
-    bool _isMealFav(String id) {
-      return favouriteMeals.any((meal) => meal.id == id);
-    }
+  bool _isMealFav(String id) {
+    return favouriteMeals.any((meal) => meal.id == id);
+  }
 
-    @override
-    Widget build(BuildContext context) {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Meals',
-        theme: ThemeData(
-          primarySwatch: Colors.pink,
-          accentColor: Colors.amberAccent,
-          canvasColor: Color.fromRGBO(255, 254, 229, 1),
-          fontFamily: 'Raleway',
-          textTheme: ThemeData.light().textTheme.copyWith(
-                body1: TextStyle(
-                  color: Color.fromRGBO(20, 51, 51, 1),
-                ),
-                body2: TextStyle(
-                  color: Color.fromRGBO(20, 51, 51, 1),
-                ),
-                title: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  fontFamily: 'RobotoCondensed',
-                ),
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Meals',
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
+        accentColor: Colors.amberAccent,
+        canvasColor: Color.fromRGBO(255, 254, 229, 1),
+        fontFamily: 'Raleway',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              body1: TextStyle(
+                color: Color.fromRGBO(20, 51, 51, 1),
               ),
-        ),
-        // home: CatagoriesScreen(),
-        initialRoute: '/',
-        routes: {
-          '/': (ctx) => TabsScreen(favouriteMeals),
-          // '/category-meals': (ctx) => CategoryMealsScreen(),
-          CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(
-                availableMeals,
+              body2: TextStyle(
+                color: Color.fromRGBO(20, 51, 51, 1),
               ),
-          MealDetailScreen.routeName: (ctx) =>
-              MealDetailScreen(_toggleFavourite, _isMealFav),
-          FilterScreen.routeName: (ctx) => FilterScreen(
-                _filters,
-                _saveFilters,
+              title: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                fontFamily: 'RobotoCondensed',
               ),
-        },
-        onUnknownRoute: (settings) {
-          return MaterialPageRoute(
-            builder: (ctx) => CategoriesScreen(),
-          );
-        },
-      );
-    }
+            ),
+      ),
+      // home: CatagoriesScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (ctx) => TabsScreen(favouriteMeals),
+        // '/category-meals': (ctx) => CategoryMealsScreen(),
+        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(
+              availableMeals,
+            ),
+        MealDetailScreen.routeName: (ctx) =>
+            MealDetailScreen(_toggleFavourite, _isMealFav),
+        FilterScreen.routeName: (ctx) => FilterScreen(
+              _filters,
+              _saveFilters,
+            ),
+      },
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (ctx) => CategoriesScreen(),
+        );
+      },
+    );
   }
 }
