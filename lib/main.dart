@@ -78,6 +78,7 @@ class _MyAppState extends State<MyApp> {
             CategoryMealsScreen(availableMeals),
         MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
         FilterScreen.routeName: (ctx) => FilterScreen(
+              _filters,
               _saveFilters,
             ),
       },
