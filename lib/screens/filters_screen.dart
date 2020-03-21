@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals/screens/tabs_screen.dart';
 import '../widgets/main_drawer.dart';
 
 class FilterScreen extends StatefulWidget {
@@ -60,6 +61,7 @@ class _FilterScreenState extends State<FilterScreen> {
                 'veg': _veg,
               };
               widget.saveFilters(selectedFilters);
+              Navigator.of(context).pushReplacementNamed('/');
             },
           )
         ],
@@ -119,6 +121,45 @@ class _FilterScreenState extends State<FilterScreen> {
                   },
                 ),
               ],
+            ),
+          ),
+          FlatButton(
+            onPressed: () {
+              final selectedFilters = {
+                'gluten': _glutenFree,
+                'lactose': _lactoseFree,
+                'vegan': _vegan,
+                'veg': _veg,
+              };
+              widget.saveFilters(selectedFilters);
+              Navigator.of(context).pushReplacementNamed('/');
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 1,
+                vertical: 10,
+              ),
+              // padding: EdgeInsets.symmetric(
+              //   vertical: 20,
+              //   horizontal: 15,
+              // ),
+              height: 70,
+              color: Theme.of(context).primaryColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.save,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    '   Apply',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
