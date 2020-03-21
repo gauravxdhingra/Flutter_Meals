@@ -8,6 +8,7 @@ class FilterScreen extends StatefulWidget {
   final Map<String, bool> currentFilters;
 
   FilterScreen(this.currentFilters, this.saveFilters);
+
   @override
   _FilterScreenState createState() => _FilterScreenState();
 }
@@ -50,16 +51,17 @@ class _FilterScreenState extends State<FilterScreen> {
         title: Text('Your Filters'),
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.save),
-              onPressed: () {
-                final selectedFilters = {
-                  'gluten': _glutenFree,
-                  'lactose': _lactoseFree,
-                  'vegan': _vegan,
-                  'veg': _veg,
-                };
-                widget.saveFilters(selectedFilters);
-              })
+            icon: Icon(Icons.save),
+            onPressed: () {
+              final selectedFilters = {
+                'gluten': _glutenFree,
+                'lactose': _lactoseFree,
+                'vegan': _vegan,
+                'veg': _veg,
+              };
+              widget.saveFilters(selectedFilters);
+            },
+          )
         ],
       ),
       drawer: MainDrawer(),

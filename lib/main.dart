@@ -74,8 +74,9 @@ class _MyAppState extends State<MyApp> {
         '/': (ctx) => TabsScreen(),
 
         // '/category-meals': (ctx) => CategoryMealsScreen(),
-        CategoryMealsScreen.routeName: (ctx) =>
-            CategoryMealsScreen(availableMeals),
+        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(
+              availableMeals,
+            ),
         MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
         FilterScreen.routeName: (ctx) => FilterScreen(
               _filters,
