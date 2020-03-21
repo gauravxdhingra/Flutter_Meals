@@ -41,11 +41,11 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
     super.didChangeDependencies();
   }
 
-  void _removeMeal(String mealId) {
-    setState(() {
-      displayedMeals.removeWhere((meal) => meal.id == mealId);
-    });
-  }
+  // void _removeMeal(String mealId) {
+  //   setState(() {
+  //     displayedMeals.removeWhere((meal) => meal.id == mealId);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +56,14 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
       body: ListView.builder(
         itemBuilder: (ctx, index) {
           return MealItem(
-              id: displayedMeals[index].id,
-              title: displayedMeals[index].title,
-              imageUrl: displayedMeals[index].imageUrl,
-              affordability: displayedMeals[index].affordability,
-              complexity: displayedMeals[index].complexity,
-              duration: displayedMeals[index].duration,
-              removeItem: _removeMeal);
+            id: displayedMeals[index].id,
+            title: displayedMeals[index].title,
+            imageUrl: displayedMeals[index].imageUrl,
+            affordability: displayedMeals[index].affordability,
+            complexity: displayedMeals[index].complexity,
+            duration: displayedMeals[index].duration,
+           
+          );
         },
         itemCount: displayedMeals.length,
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals/screens/categories_screen.dart';
 import './dummy_data.dart';
 import './screens/meal_detail_screen.dart';
 import './screens/category_meals_screen.dart';
@@ -15,6 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  
   Map<String, bool> _filters = {
     'gluten': false,
     'lactose': false,
@@ -53,48 +55,61 @@ class _MyAppState extends State<MyApp> {
       setState(() {
         favouriteMeals.removeAt(existingIndex);
       });
+    } else {
+      setState(() {
+        favouriteMeals.add(DUMMY_MEALS.firstWhere((meal) => meal.id == mealId));
+      });
     }
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Meals',
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-        accentColor: Colors.amberAccent,
-        canvasColor: Color.fromRGBO(255, 254, 229, 1),
-        fontFamily: 'Raleway',
-        textTheme: ThemeData.light().textTheme.copyWith(
-              body1: TextStyle(
-                color: Color.fromRGBO(20, 51, 51, 1),
-              ),
-              body2: TextStyle(
-                color: Color.fromRGBO(20, 51, 51, 1),
-              ),
-              title: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                fontFamily: 'RobotoCondensed',
-              ),
-            ),
-      ),
-      // home: CatagoriesScreen(),
-      initialRoute: '/',
-      routes: {
-        '/': (ctx) => TabsScreen(favouriteMeals),
+    bool _isMealFav(String id) {
+      return favouriteMeals.any((meal) => meal.id == id);
+    }
 
-        // '/category-meals': (ctx) => CategoryMealsScreen(),
-        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(
-              availableMeals,
-            ),
-        MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
-        FilterScreen.routeName: (ctx) => FilterScreen(
-              _filters,
-              _saveFilters,
-            ),
-      },
-    );
+    @override
+    Widget build(BuildContext context) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Meals',
+        theme: ThemeData(
+          primarySwatch: Colors.pink,
+          accentColor: Colors.amberAccent,
+          canvasColor: Color.fromRGBO(255, 254, 229, 1),
+          fontFamily: 'Raleway',
+          textTheme: ThemeData.light().textTheme.copyWith(
+                body1: TextStyle(
+                  color: Color.fromRGBO(20, 51, 51, 1),
+                ),
+                body2: TextStyle(
+                  color: Color.fromRGBO(20, 51, 51, 1),
+                ),
+                title: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  fontFamily: 'RobotoCondensed',
+                ),
+              ),
+        ),
+        // home: CatagoriesScreen(),
+        initialRoute: '/',
+        routes: {
+          '/': (ctx) => TabsScreen(favouriteMeals),
+          // '/category-meals': (ctx) => CategoryMealsScreen(),
+          CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(
+                availableMeals,
+              ),
+          MealDetailScreen.routeName: (ctx) =>
+              MealDetailScreen(_toggleFavourite, _isMealFav),
+          FilterScreen.routeName: (ctx) => FilterScreen(
+                _filters,
+                _saveFilters,
+              ),
+        },
+        onUnknownRoute: (settings) {
+          return MaterialPageRoute(
+            builder: (ctx) => CategoriesScreen(),
+          );
+        },
+      );
+    }
   }
 }
