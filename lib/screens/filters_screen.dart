@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meals/screens/tabs_screen.dart';
+
 import '../widgets/main_drawer.dart';
 
 class FilterScreen extends StatefulWidget {
@@ -19,6 +19,8 @@ class _FilterScreenState extends State<FilterScreen> {
   bool _veg = false;
   bool _vegan = false;
   bool _lactoseFree = false;
+
+  bool homePage = true;
 
   @override
   void initState() {
@@ -61,6 +63,7 @@ class _FilterScreenState extends State<FilterScreen> {
                 'veg': _veg,
               };
               widget.saveFilters(selectedFilters);
+              homePage = false;
               Navigator.of(context).pushReplacementNamed('/');
             },
           )
@@ -132,6 +135,7 @@ class _FilterScreenState extends State<FilterScreen> {
                 'veg': _veg,
               };
               widget.saveFilters(selectedFilters);
+              homePage = false;
               Navigator.of(context).pushReplacementNamed('/');
             },
             child: Container(
